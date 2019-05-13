@@ -28,7 +28,8 @@ public class FileUploadController {
     private FileUploadClient fileUploadClient;
 
     @PostMapping
-    public Response<FileUploadView> upload(@RequestParam("file") MultipartFile file) {
+    public Response<FileUploadView> upload(@RequestParam("image") MultipartFile file) {
+
         Response<Map<String, Object>> response = fileUploadClient.upload(file);
         FileUploadView view = new FileUploadView();
         view.setPath(response.getData().get("fileName").toString());
