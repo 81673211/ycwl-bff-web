@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -23,7 +24,7 @@ import feign.codec.Encoder;
  * <br><b>ClassName:</b> 
  * <br><b>Date:</b> 2019/5/6 14:10
  */
-@FeignClient(value = "ycwl-file", configuration = MultipartSupportConfig.class, url = "http://localhost:8901")
+@FeignClient(value = "ycwl-file", configuration = MultipartSupportConfig.class)
 public interface FileUploadClient {
 
     @PostMapping(value = "/file/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -33,6 +34,7 @@ public interface FileUploadClient {
     class MultipartSupportConfig {
 
         @Bean
+        @Scope
         public Encoder feignFormEncoder() {
             return new FeignSpringFormEncoder();
         }
